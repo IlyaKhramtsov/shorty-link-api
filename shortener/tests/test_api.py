@@ -10,10 +10,10 @@ from shortener.models import Shortener
 class ShortenerApiTestCase(APITestCase):
     def setUp(self):
         self.link_1 = Shortener.objects.create(
-            link='https://www.example.com/long-string1'
+            link='https://docs.djangoproject.com/en/4.0/'
         )
         self.link_2 = Shortener.objects.create(
-            link='https://www.example.com/long-string2',
+            link='https://www.djangoproject.com/community/',
             short_id='custom-id'
         )
 
@@ -29,7 +29,7 @@ class ShortenerApiTestCase(APITestCase):
         self.assertEqual(2, Shortener.objects.all().count())
         url = reverse('shortener-list')
         data = {
-            'link': 'https://www.test.com/test-string/',
+            'link': 'https://www.django-rest-framework.org/api-guide/testing/',
         }
         json_data = json.dumps(data)
         response = self.client.post(url, data=json_data, content_type='application/json', HTTP_HOST='testserver')
