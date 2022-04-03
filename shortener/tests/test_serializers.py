@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 from django.utils.dateparse import parse_datetime
@@ -9,9 +10,11 @@ from shortener.serializers import ShortenerSerializer
 
 class ShortenerSerializerTestCase(TestCase):
     def test_contains_expected_data(self):
+        user = User.objects.create(username='test_user')
         shortener = Shortener.objects.create(
             link='https://www.example.com/test-long-string',
-            short_id='custom-id'
+            short_id='custom-id',
+            owner=user
         )
         request_factory = APIRequestFactory()
         request = request_factory.post(reverse('shortener-detail', args=(shortener.id,)), HTTP_HOST='testserver')
