@@ -6,6 +6,7 @@ from .utils import is_success_url
 
 class ShortenerSerializer(serializers.ModelSerializer):
     short_url = serializers.SerializerMethodField()
+    owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Shortener
