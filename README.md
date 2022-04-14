@@ -1,7 +1,13 @@
 # shorty-link-api
 
-### Description
+## Description
 shorty-link-api - is a web service for shortening URLs.
+
+## Technologies:
+- Python 3.9
+- Django 4.0.3
+- Django REST Framework
+- PostgreSQL
 
 ## Registration and authentication endpoints
 
@@ -137,4 +143,43 @@ Response:
   "short_id":"IEO37A0ZLu",
   "created":"2022-04-12T20:04:32.627494Z"
 }
+```
+### /api/v1/shortener/{id}
+Update shortened URL.
+
+Method: `PUT`
+
+Arguments:
+
+-   `link`
+-   `short_id`
+
+Example: 
+```bash
+$ curl -X PUT 
+       -H "Accept: application/json" 
+       -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ5OTY2ODI2LCJqdGkiOiIwYTZkZDA4ODQ3ZmQ0Mzc2YjhjNjJkMTVkODMzYTAzZiIsInVzZXJfaWQiOjR9.jlW3HLyL3aCw-gwiCuIqGR3JeAbuy0wQ9EVGJ7683EU" 
+       -d "link=http://www.yahoo.com/&short_id=example" 
+       http://127.0.0.1:8000/api/v1/shortener/3/
+```
+Response:
+```json
+{
+  "id":3,
+  "short_url":"http://127.0.0.1:8000/example",
+  "link":"http://www.yahoo.com/",
+  "short_id":"example",
+  "created":"2022-04-12T20:13:00.785387Z"
+}
+```
+### /api/v1/shortener/{id}
+Delete shortened URL.
+
+Method: `DELETE`
+
+Example: 
+```bash
+$ curl -X DELETE 
+       -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ5OTY3Mjc5LCJqdGkiOiIyZDgxYjFhNTdlZmM0OGNjOWFkZWU1YzIyYjA4NTM4YSIsInVzZXJfaWQiOjR9.LlaVjUe8t0bSMFaHxq8j4RJwgsAHt_ABjLOU3Si4OL4" 
+       http://127.0.0.1:8000/api/v1/shortener/9/
 ```
